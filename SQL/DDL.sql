@@ -1284,7 +1284,7 @@ CREATE TABLE TelefonoProveedor(
 
 -- RESTRICCIONES DE DOMINIO TelefonoProveedor
 ALTER TABLE TelefonoProveedor ADD CONSTRAINT telefonoProveedor_d1
-CHECK(Telefono SIMILAR TO '[0-9]');
+CHECK(Telefono SIMILAR TO '[0-9]{10}');
 ALTER TABLE TelefonoProveedor ALTER COLUMN Telefono SET NOT NULL;
 
 ALTER TABLE TelefonoProveedor ADD CONSTRAINT telefonoProveedor_d2
