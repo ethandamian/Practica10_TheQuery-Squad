@@ -2,6 +2,35 @@
 se debe encargar de insertar en la tabla correspondiente, es importante que no permitan la inserci ́on de
 n ́umeros o s ́ımbolos cuando sean campos relacionados a nombres.*/
 
+CREATE OR REPLACE PROCEDURE registrarVisitante
+(nombre VARCHAR, paterno VARCHAR, materno VARCHAR,
+genero VARCHAR, nacimiento DATE)
+AS $$
+BEGIN
+	IF nombre ~ '[0-9!@#$%^&*()_+=\[\]{};:,.<>?]' OR 
+	   paterno ~ '[0-9!@#$%^&*()_+=\[\]{};:,.<>?]' OR
+	   materno ~ '[0-9!@#$%^&*()_+=\[\]{};:,.<>?]'
+	THEN
+		RAISE EXCEPTION 'No se pudo realizar la inserción. El nombre o apellidos ingresados no son válidos';
+	ELSE
+		IF nacimiento >= CURRENT_DATE
+		THEN
+			RAISE EXCEPTION 'La fecha de nacimiento ingresada no es válida';
+		ELSE
+			INSERT INTO Visitante (genero, nombre, paterno, materno, fechanacimiento)
+			VALUES (genero, nombre, paterno, materno, nacimiento);
+			RAISE NOTICE 'El visitante ha sido registrado correctamente';
+		END IF;
+	END IF;
+END;
+$$
+Language plpgsql;
+
+select * from visitante;
+
+CALL registrarVisitante ('Jimin', 'Park', 'Chimmy', 'Masculino', '1995-10-13');-- Se permite
+CALL registrarVisitante ('Jimin', 'Kim', 'Chimmy', 'Masculino', '2023-12-31');-- No se permite porque la fecha es futura
+CALL registrarVisitante ('Jim@in', 'Kim', 'Chimmy', 'Masculino', '2023-12-31');-- No se permite porque el nombre tiene un caracter no valido.
 
 
 
