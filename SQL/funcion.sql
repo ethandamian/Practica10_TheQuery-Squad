@@ -1,3 +1,5 @@
+-- Una funcion que reciba el identificador de veterinarios y regrese la edad del mismo.
+
 CREATE OR REPLACE FUNCTION obtener_edad_veterinario(id_veterinario character varying)
 RETURNS integer AS $$
 DECLARE

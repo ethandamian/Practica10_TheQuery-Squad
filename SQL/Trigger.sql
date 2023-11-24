@@ -1,4 +1,4 @@
--- I) Un trigger que se encargue de invertir el apellido paterno con el apellido materno de los proveedores.
+-- i Un trigger que se encargue de invertir el apellido paterno con el apellido materno de los proveedores.
 
 
 -- Crear la función que se ejecutará cuando se active el trigger
@@ -46,7 +46,7 @@ UPDATE Proveedor SET ApellidoPaterno = 'Ewbanke' WHERE RFCProveedor ='HIWE559826
 */
 
 
--- ii) Un trigger que se encargue de contar las personas que asisten a un evento, y agregarlo como atributo en
+-- ii. Un trigger que se encargue de contar las personas que asisten a un evento, y agregarlo como atributo en
 --evento. Cada vez que se inserte, se debera actualizar el campo.
 
 -- Crear una función que se ejecutará cuando se active el trigger
@@ -70,5 +70,5 @@ EXECUTE FUNCTION actualizar_contador();
 
 ALTER TABLE Evento ADD COLUMN contador_asistentes INT DEFAULT 0;
 
---Al insertarse filas en cierto evento el atributo de ese evento se incrementa
+-- Al insertarse filas en cierto evento el atributo de ese evento se incrementa
 
