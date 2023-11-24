@@ -24,13 +24,13 @@ DECLARE
     numero_animales integer;
 BEGIN
     SELECT COUNT(*) INTO numero_animales
-    FROM animal
-    WHERE bioma = bioma;
+    FROM animal a
+    WHERE a.idbioma in (select idbioma from bioma b where b.tipobioma = bioma);
 
     RETURN numero_animales;
 END;
 $$ LANGUAGE plpgsql;
 
-SELECT obtener_numero_animales_bioma('Selva');
-SELECT obtener_numero_animales_bioma('Desierto');
-SELECT obtener_numero_animales_bioma('Tundra');
+SELECT obtener_numero_animales_bioma('aviario');
+SELECT obtener_numero_animales_bioma('desierto'); -- 154
+SELECT obtener_numero_animales_bioma('tundra'); -- 0
