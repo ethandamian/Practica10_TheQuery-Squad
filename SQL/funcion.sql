@@ -16,3 +16,21 @@ $$ LANGUAGE plpgsql;
 SELECT obtener_edad_veterinario('XRLH017039DDI');
 SELECT obtener_edad_veterinario('DFRI0797275VI');
 SELECT obtener_edad_veterinario('KDXO0616156NB');
+
+-- Una función que reciba el bioma y calcule el número de animales en ese bioma.
+CREATE OR REPLACE FUNCTION obtener_numero_animales_bioma(bioma character varying)
+RETURNS integer AS $$
+DECLARE
+    numero_animales integer;
+BEGIN
+    SELECT COUNT(*) INTO numero_animales
+    FROM animal
+    WHERE bioma = bioma;
+
+    RETURN numero_animales;
+END;
+$$ LANGUAGE plpgsql;
+
+SELECT obtener_numero_animales_bioma('Selva');
+SELECT obtener_numero_animales_bioma('Desierto');
+SELECT obtener_numero_animales_bioma('Tundra');
